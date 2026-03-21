@@ -21,35 +21,35 @@ export default function FoodCard({ item, special = false }) {
   const decrease = () => dispatch({ type: 'UPDATE_QTY', payload: { id: item.id, qty: qty - 1 } });
 
   return (
-    <div className={`food-card w-48 md:w-52 ${special ? 'w-52 md:w-56' : ''}`}>
+    <div className={`glass rounded-2xl overflow-hidden flex flex-col h-full ${special ? 'w-48 md:w-56 flex-shrink-0' : 'w-full'}`}>
       {/* Image */}
-      <div className="relative h-36 overflow-hidden bg-white/5">
+      <div className="relative w-full h-40 md:h-44 bg-white/5">
         {!imgError ? (
           <img
             src={item.image}
             alt={item.name}
             onError={() => setImgError(true)}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-4xl"><Utensils size={28} /></div>
         )}
         {/* Badges */}
-        <div className="absolute top-2 left-2 flex flex-col gap-1">
-          <span className={item.isVeg ? 'badge-veg inline-flex items-center gap-2' : 'badge-nonveg inline-flex items-center gap-2'}>
+        <div className="absolute top-3 left-3 flex flex-col gap-2">
+          <span className={`inline-flex items-center gap-2 text-xs font-medium px-2 py-0.5 rounded ${item.isVeg ? 'bg-green-900/30 text-green-300' : 'bg-red-900/30 text-red-300'}`}>
             {item.isVeg ? <><Leaf size={12} /> Veg</> : <><Utensils size={12} /> Non-Veg</>}
           </span>
-          {item.isSpecial && <span className="badge-special inline-flex items-center gap-2"><Star size={12} /> Special</span>}
+          {item.isSpecial && <span className="inline-flex items-center gap-2 text-xs font-medium px-2 py-0.5 rounded bg-yellow-900/30 text-yellow-300"><Star size={12} /> Special</span>}
         </div>
       </div>
 
       {/* Info */}
-      <div className="p-3">
-        <h3 className="text-white font-medium text-sm leading-tight mb-1 truncate">{item.name}</h3>
+      <div className="p-3 flex flex-col flex-1">
+        <h3 className="text-white font-semibold text-sm leading-tight mb-1 truncate">{item.name}</h3>
         {item.description && (
-          <p className="text-white/35 text-xs leading-relaxed line-clamp-2 mb-3">{item.description}</p>
+          <p className="text-white/60 text-xs leading-tight line-clamp-2 mb-3">{item.description}</p>
         )}
-        <div className="flex items-center justify-between mt-1">
+        <div className="flex items-center justify-between mt-auto">
           <span className="text-white font-semibold text-sm">
             {formatCurrency(item.price, restaurant?.currency)}
           </span>
@@ -57,7 +57,7 @@ export default function FoodCard({ item, special = false }) {
             <motion.button
               whileTap={{ scale: 0.92 }}
               onClick={addToCart}
-              className="bg-red-600/20 border border-red-500/30 text-red-400 text-xs font-semibold px-3 py-1.5 rounded-xl hover:bg-red-600/30 transition-all"
+              className="bg-red-600/20 border border-red-500/30 text-red-400 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-red-600/30 transition-all"
             >
               + Add
             </motion.button>
@@ -65,14 +65,14 @@ export default function FoodCard({ item, special = false }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={decrease}
-                className="w-6 h-6 rounded-lg bg-white/10 text-white flex items-center justify-center text-sm hover:bg-white/15 transition-all"
+                className="w-7 h-7 rounded-lg bg-white/10 text-white flex items-center justify-center text-sm hover:bg-white/15 transition-all"
               >
                 −
               </button>
-              <span className="text-white text-sm font-bold w-4 text-center">{qty}</span>
+              <span className="text-white text-sm font-bold w-5 text-center">{qty}</span>
               <button
                 onClick={increase}
-                className="w-6 h-6 rounded-lg bg-red-600/20 border border-red-500/30 text-red-400 flex items-center justify-center text-sm hover:bg-red-600/30 transition-all"
+                className="w-7 h-7 rounded-lg bg-red-600/20 border border-red-500/30 text-red-400 flex items-center justify-center text-sm hover:bg-red-600/30 transition-all"
               >
                 +
               </button>

@@ -138,7 +138,7 @@ export default function MenuPage() {
         </div>
       )}
 
-      <div className="pt-24 pb-32 max-w-7xl mx-auto px-4 md:px-8">
+      <div className="pt-24 pb-40 max-w-7xl mx-auto px-4 md:px-8">
         {/* Search + Filter */}
         <div className="flex flex-col sm:flex-row gap-3 mb-8">
           <div className="relative flex-1">
@@ -210,7 +210,7 @@ export default function MenuPage() {
 
         {/* Menu grid */}
         {itemsLoading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
             {[...Array(8)].map((_, i) => (
               <div key={i} className="glass rounded-2xl h-64 animate-pulse" />
             ))}
@@ -223,7 +223,7 @@ export default function MenuPage() {
         ) : (
           <motion.div
             layout
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"
+            className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5"
           >
             <AnimatePresence>
               {filtered.map(item => (
@@ -250,16 +250,16 @@ export default function MenuPage() {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40"
+            className="fixed bottom-4 left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 z-40"
           >
             <button
               onClick={() => setCartOpen(true)}
-              className="btn-primary flex items-center gap-4 px-8 py-4 text-base shadow-2xl"
+              className="btn-primary w-full md:w-auto flex items-center justify-between gap-4 px-5 py-3 text-base shadow-2xl rounded-2xl"
             >
               <span className="bg-white/20 rounded-full w-7 h-7 flex items-center justify-center text-sm font-bold">
                 {totalItems}
               </span>
-              <span>View Cart</span>
+              <span className="font-semibold">View Cart</span>
               <span className="text-white/80">{formatCurrency(subtotal, restaurant?.currency)}</span>
             </button>
           </motion.div>
